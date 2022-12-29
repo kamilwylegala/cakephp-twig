@@ -7,7 +7,7 @@ use Symfony\Component\Templating\TemplateNameParser as BaseTemplateNameParser;
 
 class TemplateNameParser extends BaseTemplateNameParser
 {
-    public function parse($name)
+    public function parse(string|TemplateReferenceInterface $name): TemplateReferenceInterface
     {
         if ($name instanceof TemplateReferenceInterface) {
             return $name;

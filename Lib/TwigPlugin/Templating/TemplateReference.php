@@ -17,7 +17,7 @@ class TemplateReference extends BaseTemplateReference
         );
     }
     
-    public function getPath()
+    public function getPath() : string
     {
         $controller = $this->get('controller');
         
@@ -26,12 +26,12 @@ class TemplateReference extends BaseTemplateReference
         return $path;
     }
     
-    public function getLogicalName()
+    public function getLogicalName() : string
     {
         return self::__toString();   
     }
     
-    public function __toString()
+    public function __toString() : string
     {
         return sprintf("%s:%s:%s.%s.%s", $this->get('plugin'), $this->get('controller'), $this->get('name'), $this->get('format'), $this->get('engine'));
     }

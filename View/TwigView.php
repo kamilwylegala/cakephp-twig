@@ -168,7 +168,7 @@ class TwigView extends View
         $this->loadHelpers();
 
         try {
-            $parsed = $this->TwigLoader->parser->parse($view);
+            $parsed = $view !== null ? $this->TwigLoader->parser->parse($view) : false;
         } catch (\Exception $e) {
             $parsed = false;
         }
