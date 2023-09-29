@@ -2,7 +2,10 @@
 
 namespace TwigPlugin\Extension;
 
-class FormExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class FormExtension extends AbstractExtension
 {
     /**
      * @var \FormHelper
@@ -21,32 +24,32 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'form' => new \Twig_Function_Method($this, 'formTag',
+            'form' => new TwigFunction( 'formTag',$this,
                 array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'input' => new \Twig_Function_Method($this, 'input',
+            'input' => new TwigFunction( 'input',$this,
                 array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'button' => new \Twig_Function_Method($this, 'button',
+            'button' => new TwigFunction( 'button',$this,
                 array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'submit' => new \Twig_Function_Method($this, 'submit',
+            'submit' => new TwigFunction( 'submit',$this,
                 array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'form_end' => new \Twig_Function_Method($this, 'formEnd',
-                array(
+            'form_end' => new TwigFunction('formEnd',$this,
+                                                   array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )

@@ -13,6 +13,8 @@
  * @license MIT
  */
 
+use Twig\Environment;
+use Twig\Lexer;
 use TwigPlugin\Extension\BasicExtension;
 use TwigPlugin\Templating\Loader\FilesystemLoader;
 use TwigPlugin\Templating\Loader\TemplateLocator;
@@ -129,7 +131,7 @@ class TwigView extends View
         // Really silly, but might as well update to only the paths that are valid.
         $this->TwigLoader->locator->locator = new FileLocator($this->templatePaths);
 
-        $this->TwigEnv = new Twig_Environment($this->TwigLoader, array(
+        $this->TwigEnv = new Environment($this->TwigLoader, array(
             'cache' => Configure::read('Cache.disable') == true ? false : TWIG_CACHE_PATH,
             'debug' => $this->debug,
             'auto_reload' => $this->debug,
@@ -142,7 +144,7 @@ class TwigView extends View
         }
         
         # Initialize a lexer instance with configured settings.
-        $this->TwigLexer = new Twig_Lexer($this->TwigEnv, $this->settings['lexer']);
+        $this->TwigLexer = new Lexer($this->TwigEnv, $this->settings['lexer']);
         $this->TwigEnv->setLexer($this->TwigLexer);
 
     }
@@ -190,7 +192,7 @@ class TwigView extends View
             $template = $this->TwigEnv->loadTemplate($parsed);
             $this->output = $template->render(array_merge($this->viewVars, array('_view' => $this)));
             $this->hasRendered = true;
-        } catch (Twig_Error $e) {
+        } catch (\Twig\Error\Error $e) {
             if (Configure::read("Twig.exception_renderer")) {
                 return $this->renderTwigException($e);
             } else {
@@ -233,11 +235,11 @@ class TwigView extends View
     /**
      * Render various Twig exception objects for developer feedback.
      *
-     * @param Twig_Error $error Exception object
+     * @param \Twig\Error\Error $error Exception object
      * @param string $file Exception view that will be used to render the exception in debug mode.
      * @return string returns the rendered exception HTML.
      */
-    private function renderTwigException(Twig_Error $error, $file = 'error')
+    private function renderTwigException(\Twig\Error\Error $error, $file = 'error')
     {
         $e = $error;
         $template = $this->TwigEnv->loadTemplate("Twig:Errors:{$file}.html.twig");

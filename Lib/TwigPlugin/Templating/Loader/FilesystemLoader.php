@@ -8,6 +8,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 
 use \App as App;
 use \Cache as Cache;
+use Twig\Error\LoaderError;
 
 /**
  * Extends the default Twig filesystem loader
@@ -49,13 +50,13 @@ class FilesystemLoader extends \Twig\Loader\FilesystemLoader
         } catch (\Exception $e) {
             try {
                 $file = parent::findTemplate($template);
-            } catch (\Twig_Error_Loader $e) {
+            } catch (LoaderError $e) {
                 $previous = $e;
             }
         }
 
         if (false === $file || null === $file) {
-            throw new \Twig_Error_Loader(sprintf('Unable to find template "%s".', $logicalName), -1, null, $previous);
+            throw new LoaderError(sprintf('Unable to find template "%s".', $logicalName), -1, null, $previous);
         }
 
         return $this->cache[$logicalName] = $file;
