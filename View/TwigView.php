@@ -62,7 +62,7 @@ class TwigView extends View
     /**
      * TwigEnv
      *
-     * @var \Twig_Environment object.
+     * @var Environment object.
      */
     protected $TwigEnv;
 
@@ -189,7 +189,7 @@ class TwigView extends View
 
         // Render
         try {
-            $template = $this->TwigEnv->loadTemplate($parsed);
+            $template = $this->TwigEnv->load($parsed);
             $this->output = $template->render(array_merge($this->viewVars, array('_view' => $this)));
             $this->hasRendered = true;
         } catch (\Twig\Error\Error $e) {
