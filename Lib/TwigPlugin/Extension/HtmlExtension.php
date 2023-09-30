@@ -2,7 +2,10 @@
 
 namespace TwigPlugin\Extension;
 
-class HtmlExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class HtmlExtension extends AbstractExtension
 {
     /**
      * @var \HtmlHelper
@@ -20,32 +23,32 @@ class HtmlExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'link' => new \Twig_Function_Method($this, 'link',
-                array(
+            'link' => new TwigFunction('link',$this,
+                                               array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'link_unless_current' => new \Twig_Function_Method($this, 'linkUnlessCurrent',
-                array(
+            'link_unless_current' => new TwigFunction('linkUnlessCurrent',$this,
+                                                              array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'url' => new \Twig_Function_Method($this, 'url',
-                array(
+            'url' => new TwigFunction('url',$this,
+                                              array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'css' => new \Twig_Function_Method($this, 'css',
-                array(
+            'css' => new TwigFunction('css',$this,
+                                              array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )
             ),
-            'script' => new \Twig_Function_Method($this, 'script',
-                array(
+            'script' => new TwigFunction('script',$this,
+                                                 array(
                     'pre_escape'    => 'html',
                     'is_safe'       => array('html'),
                 )

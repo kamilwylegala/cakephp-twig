@@ -2,7 +2,10 @@
 
 namespace TwigPlugin\Extension;
 
-class TextExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class TextExtension extends AbstractExtension
 {
     /**
      * @var \TextHelper $textHelper
@@ -20,33 +23,33 @@ class TextExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'truncate' => new \Twig_Filter_Method($this, 'truncate',
+            'truncate' => new TwigFilter( 'truncate',$this,
                 array(
                     'is_safe'       => array('html'),
                 )
             ),
-            'highlight' => new \Twig_Filter_Method($this, 'highlight',
-                array(
+            'highlight' => new TwigFilter('highlight',$this,
+                                                  array(
                     'is_safe'       => array('html'),
                 )
             ),
-            'autoLink' => new \Twig_Filter_Method($this, 'autoLink',
-                array(
+            'autoLink' => new TwigFilter('autoLink',$this,
+                                                 array(
                     'is_safe'       => array('html'),
                 )
             ),
-            'autoLinkUrls' => new \Twig_Filter_Method($this, 'autoLinkUrls',
-                array(
+            'autoLinkUrls' => new TwigFilter('autoLinkUrls',$this,
+                                                     array(
                     'is_safe'       => array('html'),
                 )
             ),
-            'autoLinkEmails' => new \Twig_Filter_Method($this, 'autoLinkEmails',
-                array(
+            'autoLinkEmails' => new TwigFilter('autoLinkEmails',$this,
+                                                       array(
                     'is_safe'       => array('html'),
                 )
             ),
-            'stripLinks' => new \Twig_Filter_Method($this, 'stripLinks',
-                array(
+            'stripLinks' => new TwigFilter('stripLinks',$this,
+                                                   array(
                     'is_safe'       => array('html'),
                 )
             ),
