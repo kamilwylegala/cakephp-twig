@@ -139,6 +139,13 @@ class TwigView extends View
             'autoescape' => "html",
         ));
 
+        $globals = Configure::read('twig.globals');
+        if (is_array($globals)) {
+            foreach ($globals as $key => $value) {
+                $this->TwigEnv->addGlobal($key, $value);
+            }
+        }
+
         foreach ((array)Configure::read('twig.extensions') as $ext) {
             $this->TwigEnv->addExtension(is_object($ext) ? $ext : new $ext($this));
         }
