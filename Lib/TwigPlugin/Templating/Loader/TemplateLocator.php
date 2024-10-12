@@ -19,7 +19,7 @@ class TemplateLocator implements FileLocatorInterface
         $this->view = $view;
     }
     
-    function locate(string $template, ?string $currentPath = null, bool $first = true) :array|string
+    function locate(string|object $template, ?string $currentPath = null, bool $first = true) :array|string
     {
         $plugin = $this->view->plugin;
         
